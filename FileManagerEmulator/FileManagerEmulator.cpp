@@ -11,15 +11,14 @@ ENABLE_LEAK_DETECTION;
 
 namespace Tests
 {
-    void run();
+    int run();
 }
 
 int main(int argc, char* argv[])
 {
     if(argc == 2 && Utils::equalNoCase(argv[1], "--tests"))
     {
-        Tests::run();
-        return 0;
+        return Tests::run();
     }
 
     try
@@ -31,6 +30,8 @@ int main(int argc, char* argv[])
     catch(std::exception& e)
     {
         std::cout << e.what() << std::endl;
+
+        return 1;
     }
 
     return 0;

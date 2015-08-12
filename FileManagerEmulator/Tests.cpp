@@ -18,9 +18,10 @@ namespace Tests
         }
     }
 
-    void run()
+    int run()
     {
         failedCount = 0;
+
         caseId = 0;
         {
             check(1, !Utils::validFileName(""));
@@ -131,5 +132,7 @@ namespace Tests
 
         if(failedCount == 0) std::cout << "All tests passed OK" << std::endl;
         else std::cout << failedCount << " test(s) failed" << std::endl;
+
+        return failedCount;
     }
 }
