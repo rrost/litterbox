@@ -1,0 +1,10 @@
+md TESTHARD
+cd tEstHaRd
+md harder
+cd harder
+mf blabla.x
+md BLABLA
+move blabla c:
+cd c:\testhard
+move harder c:
+move c:\harder\blabla.x c:

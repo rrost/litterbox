@@ -1,0 +1,8 @@
+md test1
+md test1\test2
+md test1\test2\test3
+mhl c: test1\test2\test3
+mdl test1\test2\test3 test1\test2\test3
+cd test1
+md xtra
+move test2\test3 xtra

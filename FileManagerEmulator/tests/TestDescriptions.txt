@@ -1,0 +1,168 @@
+---------------------------------------------------------
+Test1 - shall pass with no error
+
+Description:
+Simple directory and file creation operations
+
+Output shall be:
+
+C:
+|_DIR1
+|   |_DIR2
+|   |   |_DIR3
+|   |       |_readme.txt
+|   |  
+|   |_DIR4 
+|   |   |_temp.dat
+|   |  
+|   |_DIR5
+
+---------------------------------------------------------
+Test2 - shall pass with no error
+
+Description:
+Simple directory and file creation, removing operations
+
+Output shall be:
+
+C:
+|_DIR1
+|   |_DIR2
+|   |  
+|   |_DIR4 
+|   |   |_temp.dat
+|   |  
+|   |_DIR5
+
+---------------------------------------------------------
+Test3 - shall pass with no error
+
+Description:
+Simple directory and file creation, copy and tree removing operations
+
+Output shall be:
+
+C:
+|_DIR2
+|   |_a.txt
+|   |_b.txt
+|   
+|_DIR3
+|   |_DIR2 
+|   |   |_a.txt
+|   |   |_b.txt
+
+---------------------------------------------------------
+Test4 - shall return some error
+
+Description:
+Inpout file contains illegal file creation command. Actual directory doesn't exist.
+
+---------------------------------------------------------
+Test5 - shall return some error
+
+Description:
+Inpout file contains illegal commands CC and MB.
+
+---------------------------------------------------------
+Test6 - shall return some error
+
+Description:
+Inpout file contains garbage.
+
+---------------------------------------------------------
+Test7 - shall pass with no error
+
+Description: 
+Test check correct handling of whitespaces.
+
+Output shall be:
+
+C:
+|_DIR1
+|   |_DIR2
+|   |   |_DIR3
+|   |       |_readme.txt
+|   |  
+|   |_DIR4 
+|   |   |_temp.dat
+|   |  
+|   |_DIR5
+
+---------------------------------------------------------
+Test8 - shall pass with no error
+
+Description:
+Simple directory and file creation, copy and tree removing operations.
+Also created one hard link to the directory that we try to delete.
+
+
+Output shall be:
+
+C:
+|_DIR
+|   |_hlink[C:\Dir1\Dir2\Dir3\Dir4\Dir5\file5.dat]
+|
+|_DIR1
+|   |_Dir2
+|   	|_Dir3
+|   	    |_Dir4
+|   		|_Dir5
+|   		    |_file5.dat
+|   
+|_DIR2
+|   |_a.txt
+|   |_b.txt
+|   
+|_DIR3
+|   |_DIR2 
+|   |   |_a.txt
+|   |   |_b.txt
+
+---------------------------------------------------------
+Test9 - shall pass with no error
+
+Description:
+Simple directory and file creation, copy and tree removing operations.
+Also created one soft link to the directory that we try to delete.
+
+
+Output shall be:
+
+C:
+|_DIR
+|   
+|_DIR2
+|   |_a.txt
+|   |_b.txt
+|   
+|_DIR3
+|   |_DIR2 
+|   |   |_a.txt
+|   |   |_b.txt
+
+---------------------------------------------------------
+Test10 - shall return some error
+
+Description:
+Inpout file contains illegal file and directory names
+
+---------------------------------------------------------
+Test11 - shall pass with no error
+
+Description:
+Simple directory and file creation, dynamic link creation and directory moving. Dynamic link value should be changed.
+
+
+Output shall be:
+
+C:
+|_DIR1
+|   |_DIR2
+|   |  
+|   |_EDIR4 
+|   |   |_DIR3
+|   |       |_readme.txt
+|   |  
+|   |_EDIR5
+|   |   |_dlink[C:\DIR1\EDIR4\DIR3\readme.txt]

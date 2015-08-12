@@ -1,0 +1,6 @@
+md 42
+md 42\a
+md 42\a\b
+cd 42\a\b
+md c:\1
+move c:\42 c:\1

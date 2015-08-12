@@ -1,0 +1,11 @@
+MD Dir1
+CD Dir1
+MD Dir2
+CD Dir2
+MD Dir3
+MF Dir3\readme.txt
+CD C:\Dir1
+MD EDir4
+MD EDir5
+MDL C:\Dir1\Dir2\Dir3\readme.txt C:\Dir1\EDir5
+MOVE C:\DIR1\DIR2\DIR3 C:\DIR1\EDIR4

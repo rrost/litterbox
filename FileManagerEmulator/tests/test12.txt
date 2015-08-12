@@ -1,0 +1,58 @@
+md dir1
+md dir1\dir2
+md dir1\dir2\dir3
+md dir1\dir2\dir3\dir4
+md dir1\dir2\dir3\dir4\dir5
+cd dir1\dir2\dir3\dir4\dir5
+md dir6
+cd c:
+md dir12
+cd dir12
+cd c:\dir1\dir2\dir3
+md dir31
+md xdir
+md zdir
+md ydir
+cd c:\dir1\dir2
+md dirb
+md dira
+md 1dir1
+rd c:\dir12
+rd 1dir1
+md TROLLO
+cd TROLLO
+deltree C:\dir1\dir2\dir3\dir4
+MF trollo
+MF trollo
+MF trollo
+MF trollo.
+MF trollo.txt
+MF trollo.txt
+MF c:\ztrollo.txt
+MF c:\atrollo.txz
+del trollo
+del trollo.
+del C:\ztrOllO.tXt
+ cd c:\dir1\dir2
+mhl c:\atrollo.txz trollo
+deltree trollo
+del c:\atrollo.txz
+mf c:\drumm.txt
+mdl c:\drumm.txt dir3\xdir
+mdl c:\drumm.txt dir3\xdir
+mdl c:\drumm.txt dir3\Ydir
+mhl c:\drumm.txt dir3\zdir
+deltree dir3\zdir
+move c:\drumm.txt c:\dir1\dir2\dirb
+mhl c:\dir1\dir2\dirb dir3\ydir
+mhl c:\dir1\dir2\dirb dir3\xdir
+copy c:\dir1\dir2\dirb\drumm.txt c:\dir1\dir2\dira
+copy c:\dir1\dir2\dira c:\dir1\dir2\dir3\dir31
+copy c:\dir1\dir2\dira c:\dir1\dir2\dira
+md c:\copy
+copy c:\dir1 c:\copy
+cd c:
+md backup
+cd copy\dir1
+move DIR2 c:\backup
+cd c:
