@@ -1,4 +1,7 @@
 #include <cstdlib>
+#include <ctime>
+#include <chrono>
+#include <iomanip>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -16,7 +19,7 @@
 ///
 /// Note 3: no domain name detection implemented (that's not actually possible
 /// with proposed function interface as local domain name cannot be distinguished
-/// from folder name). Otherwise it's assumed that if path doesn't start with 
+/// from folder name). Otherwise it's assumed that if path doesn't start with
 /// "/", "./" or "../" than first subfolder is domain-like and it's considered
 /// virtual root.
 /// Example: "bar/../foo" -> "bar/foo", "/bar/../foo" -> "/foo"
@@ -46,11 +49,11 @@ std::string normalize(const std::string& path)
     size_t cur_pos = 0;
     size_t prev_pos = 0;
 
-    const auto add_folder = 
+    const auto add_folder =
     [&path, &folders, &root_pos, &cur_pos, &prev_pos](size_t pos)
     {
         const size_t len = pos - prev_pos;
-        if (len == 0 || 
+        if (len == 0 ||
             (len == 1 && (path[pos - 1] == rel_point)) ||
             (len == 2 && path[pos - 1] == rel_point && path[pos - 2] == delimiter))
         {
@@ -67,7 +70,7 @@ std::string normalize(const std::string& path)
         {
             // Norm subfolder, add it.
             folders.emplace_back(prev_pos, pos);
-            
+
             // Subfolder starts from string beginning but doesn't start with "/".
             // Hmmm, guess it's domain name and new root. Don't harass it by upcoming "..".
             if (prev_pos == 0 && path[0] != delimiter) root_pos = 1;
@@ -122,6 +125,73 @@ void test(const std::string& input, const std::string& expected)
         << std::endl;
 }
 
+std::string generate_path(size_t seed, size_t max_len)
+{
+    std::string s;
+
+    while (s.size() < max_len)
+    {
+        if (seed % 2 == 0) s += "/";
+        if (seed % 3 == 0) s += "bar";
+        if (seed % 4 == 0) s += "foo";
+        if (seed % 5 == 0) s += "baz";
+        if (seed % 6 == 0) s += "/../";
+        if (seed % 7 == 0) s += "/./";
+        if (seed % 8 == 0) s += "/./../";
+        if (seed % 9 == 0) s += "/.././";
+        ++seed;
+    }
+
+    return s;
+}
+
+void performance_test()
+{
+    constexpr size_t max_count = 100000;
+    constexpr size_t max_path_size = 4096;
+
+    std::cout << "Starting performance test, please wait..." << std::endl;
+    std::cout << "Loop count - " << max_count << std::endl;
+    std::cout << "Path size - " << max_path_size << std::endl;
+
+    std::vector<std::string> test;
+    test.reserve(max_count);
+
+    double total_size = 0;
+    for (size_t i = 0; i < max_count; ++i)
+    {
+        test.push_back(generate_path(time(nullptr), max_path_size));
+        total_size += test.back().size();
+    }
+
+    // Warm-up pass.
+    for (volatile size_t i = 0; i < max_count; ++i)
+    {
+        volatile auto s = normalize(test[i]);
+    }
+
+    // Measure pass.
+    using namespace std::chrono;
+    const auto start = high_resolution_clock::now();
+
+    for (volatile size_t i = 0; i < max_count; ++i)
+    {
+        volatile auto s = normalize(test[i]);
+    }
+
+    const auto end = high_resolution_clock::now();
+    const duration<double, std::micro> total_time_us(end - start);
+
+    std::cout << std::fixed << std::setprecision(2);
+    std::cout << "Total duration " << total_time_us.count() << " us" << std::endl;
+    std::cout << "Average duration " << (total_time_us.count() / max_count) << " us" << std::endl;
+
+    const auto duration_sec = total_time_us.count() / 1E6;
+    const auto total_size_mb = total_size / 1E6;
+
+    std::cout << "Average throughput " << (total_size_mb / duration_sec) << " MB/s" << std::endl;
+}
+
 int main()
 {
     test("../bar", "/bar");
@@ -154,6 +224,8 @@ int main()
 
     test("domain.com/.../foo", "domain.com/.../foo");          // Sorry, garbage in - garbage out
     test(".../domain.com/.../foo", ".../domain.com/.../foo");  // Sorry, garbage in - garbage out
+
+    performance_test();
 
     return tests_failed;
 }
