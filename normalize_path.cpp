@@ -124,6 +124,12 @@ void test(const std::string& input, const std::string& expected)
 
 int main()
 {
+    test("../bar", "/bar");
+    test("/foo/bar", "/foo/bar");
+    test("/foo/bar/../baz", "/foo/baz");
+    test("/foo/bar/./baz/", "/foo/bar/baz/");
+    test("/foo/../../baz", "/baz");
+
     test("", "");
     test("/", "/");
     test("///", "/");
