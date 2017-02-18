@@ -1,2 +1,2 @@
 # litterbox
-Non-production/experimental/test assigments code repository. This code may smell. Beware.
+Non-production/experimental/test assignments code repository. This code may smell. Beware.
