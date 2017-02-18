@@ -90,6 +90,7 @@ std::string normalize(const std::string& path)
         add_folder(delim_pos);
     }
 
+    // Process last subfolder separately.
     add_folder(path.size());
 
     std::string result;
