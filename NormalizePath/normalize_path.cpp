@@ -164,10 +164,12 @@ void performance_test()
     std::vector<std::string> test;
     test.reserve(max_count);
 
+    std::srand(std::time(nullptr));
+
     double total_size = 0;
     for (size_t i = 0; i < max_count; ++i)
     {
-        test.push_back(generate_path(time(nullptr), max_path_size));
+        test.push_back(generate_path(std::rand(), max_path_size));
         total_size += test.back().size();
     }
 
