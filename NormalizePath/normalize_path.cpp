@@ -21,7 +21,7 @@
 /// Note 3: no domain name detection implemented (that's not actually possible
 /// with proposed function interface as local domain name cannot be distinguished
 /// from folder name). Otherwise it's assumed that if path doesn't start with
-/// "/", "./" or "../" than first subfolder is domain-like and it's considered
+/// "/", "./" or "../" then first subfolder is domain-like and it's considered
 /// virtual root.
 /// Example: "bar/../foo" -> "bar/foo", "/bar/../foo" -> "/foo"
 std::string normalize(const std::string& path)
